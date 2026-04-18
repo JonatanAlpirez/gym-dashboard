@@ -198,3 +198,52 @@ export function getWeeklyFrequency() {
     ORDER BY strftime('%w', date)
   `).all() as { day_name: string; count: number }[];
 }
+
+export function getWorkoutById(id: number): WorkoutDetail | null {
+  const db = getDb();
+  
+  const workout = db.prepare(`
+    SELECT id, date, name, duration_sec
+    FROM workouts
+    WHERE id = ?
+  `).get(id) as any;
+
+  if (!workout) return null;
+
+  const exercises = db.prepare(`
+    SELECT DISTINCT e.name, e.muscle_group
+    FROM workout_exercises we
+    JOIN exercises e ON we.exercise_id = e.id
+    WHERE we.workout_id = ?
+    ORDER BY we.exercise_order
+  `).all(id) as { name: string; muscle_group: string }[];
+
+  const result: WorkoutDetail = {
+    date: workout.date,
+    name: workout.name,
+    duration_sec: workout.duration_sec,
+    exercises: []
+  };
+
+
+  for (const ex of exercises) {
+    const sets = db.prepare(`
+      SELECT s.set_order, s.weight_lb, s.reps
+      FROM sets s
+      WHERE s.workout_exercise_id IN (
+        SELECT id FROM workout_exercises WHERE workout_id = ? AND exercise_id = (
+          SELECT id FROM exercises WHERE name = ?
+        )
+      )
+      ORDER BY s.set_order
+    `).all(id, ex.name) as any[];
+
+    result.exercises.push({
+      name: ex.name,
+      muscle_group: ex.muscle_group,
+      sets
+    });
+  }
+
+  return result;
+}
