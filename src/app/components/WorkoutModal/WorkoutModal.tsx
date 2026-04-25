@@ -1,9 +1,18 @@
 'use client';
 
 import { WorkoutDetail } from '@/lib/types';
+import styles from './WorkoutModal.module.css';
 
-function muscleGroupColor(muscle: string) {
-  return `muscle-${muscle}`;
+function muscleGroupClass(muscle: string) {
+  const map: Record<string, string> = {
+    Chest: styles.muscleChest,
+    Back: styles.muscleBack,
+    Shoulders: styles.muscleShoulders,
+    Legs: styles.muscleLegs,
+    Arms: styles.muscleArms,
+    Core: styles.muscleCore,
+  };
+  return map[muscle] || styles.muscleBadge;
 }
 
 function formatDate(dateStr: string) {
@@ -22,39 +31,39 @@ function formatDuration(sec: number) {
 
 export default function WorkoutModal({ workout, onClose }: { workout: WorkoutDetail; onClose: () => void }) {
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className={styles.modalOverlay} onClick={onClose}>
       <div
-        className="modal-content"
+        className={styles.modalContent}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="modal-header">
+        <div className={styles.modalHeader}>
           <div>
-            <h2 className="modal-title">{workout.name}</h2>
-            <p className="modal-subtitle">{formatDate(workout.date)} — {formatDuration(workout.duration_sec)}</p>
+            <h2 className={styles.modalTitle}>{workout.name}</h2>
+            <p className={styles.modalSubtitle}>{formatDate(workout.date)} — {formatDuration(workout.duration_sec)}</p>
           </div>
           <button
             onClick={onClose}
-            className="modal-close"
+            className={styles.modalClose}
           >
             ×
           </button>
         </div>
 
         {/* Exercises */}
-        <div className="modal-body">
+        <div className={styles.modalBody}>
           {workout.exercises.map((exercise, i) => (
-            <div key={i} className="exercise-item">
-              <div className="exercise-header">
-                <h3 className="exercise-name">{exercise.name}</h3>
-                <span className={`muscle-badge ${muscleGroupColor(exercise.muscle_group)}`}>
+            <div key={i} className={styles.exerciseItem}>
+              <div className={styles.exerciseHeader}>
+                <h3 className={styles.exerciseName}>{exercise.name}</h3>
+                <span className={`${styles.muscleBadge} ${muscleGroupClass(exercise.muscle_group)}`}>
                   {exercise.muscle_group}
                 </span>
               </div>
 
               {/* Sets Table */}
-              <div className="table-container">
-                <table className="sets-table">
+              <div className={styles.tableContainer}>
+                <table className={styles.setsTable}>
                   <thead>
                     <tr>
                       <th>Set</th>
@@ -66,7 +75,7 @@ export default function WorkoutModal({ workout, onClose }: { workout: WorkoutDet
                     {exercise.sets.map((set, j) => (
                       <tr key={j}>
                         <td>{set.set_order}</td>
-                        <td className="workout-volume">{set.weight_lb} lb</td>
+                        <td className={styles.workoutVolume}>{set.weight_lb} lb</td>
                         <td>{set.reps}</td>
                       </tr>
                     ))}

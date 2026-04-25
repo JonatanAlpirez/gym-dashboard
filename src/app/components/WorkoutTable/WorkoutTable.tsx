@@ -1,6 +1,7 @@
 'use client';
 
 import { WorkoutWithStats } from '@/lib/types';
+import styles from './WorkoutTable.module.css';
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr);
@@ -27,16 +28,16 @@ export default function WorkoutTable({ workouts, onWorkoutClick }: {
   onWorkoutClick: (id: number) => void;
 }) {
   return (
-    <div className="table-container">
-      <table className="table">
+    <div className={styles.tableContainer}>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>Fecha</th>
             <th>Nombre</th>
-            <th className="hidden-md">Duración</th>
-            <th className="hidden-lg">Ejercicios</th>
-            <th className="hidden-lg">Sets</th>
-            <th className="text-right">Volumen</th>
+            <th className={styles.hiddenMd}>Duración</th>
+            <th className={styles.hiddenLg}>Ejercicios</th>
+            <th className={styles.hiddenLg}>Sets</th>
+            <th className={styles.textRight}>Volumen</th>
           </tr>
         </thead>
         <tbody>
@@ -46,11 +47,11 @@ export default function WorkoutTable({ workouts, onWorkoutClick }: {
               onClick={() => onWorkoutClick(workout.id)}
             >
               <td>{formatDate(workout.date)}</td>
-              <td className="workout-name">{workout.name}</td>
-              <td className="hidden-md">{formatDuration(workout.duration_sec)}</td>
-              <td className="hidden-lg">{workout.num_exercises}</td>
-              <td className="hidden-lg">{workout.num_sets}</td>
-              <td className="workout-volume">{formatVolume(workout.total_volume)} lb</td>
+              <td className={styles.workoutName}>{workout.name}</td>
+              <td className={styles.hiddenMd}>{formatDuration(workout.duration_sec)}</td>
+              <td className={styles.hiddenLg}>{workout.num_exercises}</td>
+              <td className={styles.hiddenLg}>{workout.num_sets}</td>
+              <td className={styles.workoutVolume}>{formatVolume(workout.total_volume)} lb</td>
             </tr>
           ))}
         </tbody>

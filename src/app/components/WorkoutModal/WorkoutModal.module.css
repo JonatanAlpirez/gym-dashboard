@@ -1,0 +1,137 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: var(--modal-bg);
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 42rem;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalHeader {
+  background: linear-gradient(to right, var(--primary), color-mix(in srgb, var(--primary) 80%, black));
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.modalSubtitle {
+  color: color-mix(in srgb, var(--primary) 30%, white);
+  margin-top: 0.25rem;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.875rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modalClose:hover {
+  color: white;
+}
+
+.modalBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exerciseItem {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.exerciseItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.exerciseHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.exerciseName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Sets table */
+.tableContainer {
+  overflow-x: auto;
+}
+
+.setsTable {
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+.setsTable th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.setsTable td {
+  padding: 0.5rem 0;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.setsTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.setsTable tbody tr:hover {
+  background: var(--table-hover);
+}
+
+/* Muscle group badge */
+.muscleBadge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.muscleChest { background: #fce7f3; color: #9d174d; }
+.muscleBack { background: #dbeafe; color: #1e40af; }
+.muscleShoulders { background: #fef3c7; color: #92400e; }
+.muscleLegs { background: #dcfce7; color: #166534; }
+.muscleArms { background: #f3e8ff; color: #6b21a8; }
+.muscleCore { background: #ffedd5; color: #9a3412; }
+
+:global(.dark) .muscleChest { background: rgba(225, 29, 72, 0.2); color: #fda4af; }
+:global(.dark) .muscleBack { background: rgba(29, 78, 216, 0.2); color: #93c5fd; }
+:global(.dark) .muscleShoulders { background: rgba(217, 119, 6, 0.2); color: #fcd34d; }
+:global(.dark) .muscleLegs { background: rgba(22, 101, 52, 0.2); color: #86efac; }
+:global(.dark) .muscleArms { background: rgba(147, 51, 234, 0.2); color: #c4b5fd; }
+:global(.dark) .muscleCore { background: rgba(249, 115, 22, 0.2); color: #fed7aa; }

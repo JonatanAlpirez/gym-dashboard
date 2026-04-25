@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "./components/ThemeContext";
+import { ThemeProvider } from "./components/ThemeContext/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Gym Tracker Dashboard",

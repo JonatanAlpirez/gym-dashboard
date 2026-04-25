@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { WorkoutDetail, WorkoutWithStats, MonthlyStats, PersonalRecord } from '@/lib/types';
-import WorkoutModal from './WorkoutModal';
-import WorkoutTable from './WorkoutTable';
-import { useTheme } from './ThemeContext';
+import WorkoutModal from '../WorkoutModal/WorkoutModal';
+import WorkoutTable from '../WorkoutTable/WorkoutTable';
+import { useTheme } from '../ThemeContext/ThemeContext';
+import styles from './DashboardClient.module.css';
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr);
@@ -63,17 +64,17 @@ export default function DashboardClient({
   };
 
   return (
-    <main className="main">
+    <main className={styles.main}>
       {/* Header */}
-      <header className="header">
-        <div className="header-content">
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
           <div>
             <h1>Gym Tracker Dashboard</h1>
             <p>Datos de Strong App — {summary.totalWorkouts} entrenamientos</p>
           </div>
           <button
             onClick={toggleTheme}
-            className="theme-toggle"
+            className={styles.themeToggle}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? (
@@ -90,29 +91,29 @@ export default function DashboardClient({
         </div>
       </header>
 
-      <div className="main">
+      <div className={styles.main}>
         {/* Stats Cards */}
-        <section className="stats-grid">
+        <section className={styles.statsGrid}>
           <StatCard title="Workouts" value={summary.totalWorkouts} icon="🏋️" />
           <StatCard title="Ejercicios" value={summary.totalExercises} icon="💪" />
           <StatCard title="Sets Totales" value={summary.totalSets} icon="📊" />
           <StatCard title="Duración Prom." value={`${summary.avgDuration} min`} icon="⏱️" />
         </section>
 
-        <div className="two-col-grid">
+        <div className={styles.twoColGrid}>
           {/* Progreso Mensual */}
-          <section className="section-card">
-            <h2 className="section-title">📈 Volumen Mensual</h2>
-            <div className="volume-list">
+          <section className={styles.sectionCard}>
+            <h2 className={styles.sectionTitle}>📈 Volumen Mensual</h2>
+            <div className={styles.volumeList}>
               {monthlyStats.map((month) => (
-                <div key={month.month} className="volume-item">
-                  <span className="volume-label">{month.month}</span>
-                  <div className="volume-bar-container">
+                <div key={month.month} className={styles.volumeItem}>
+                  <span className={styles.volumeLabel}>{month.month}</span>
+                  <div className={styles.volumeBarContainer}>
                     <div
-                      className="volume-bar"
+                      className={styles.volumeBar}
                       style={{ width: `${(month.volume / maxVolume) * 100}%` }}
                     >
-                      <span className="volume-bar-text">{formatVolume(month.volume)} lb</span>
+                      <span className={styles.volumeBarText}>{formatVolume(month.volume)} lb</span>
                     </div>
                   </div>
                 </div>
@@ -121,61 +122,61 @@ export default function DashboardClient({
           </section>
 
           {/* Frecuencia Semanal */}
-          <section className="section-card">
-            <h2 className="section-title">📅 Frecuencia Semanal</h2>
-            <div className="weekly-chart">
+          <section className={styles.sectionCard}>
+            <h2 className={styles.sectionTitle}>📅 Frecuencia Semanal</h2>
+            <div className={styles.weeklyChart}>
               {weeklyFreq.map((day) => (
-                <div key={day.day_name} className="weekly-item">
-                  <div className="weekly-bar-container" style={{ height: '120px' }}>
+                <div key={day.day_name} className={styles.weeklyItem}>
+                  <div className={styles.weeklyBarContainer} style={{ height: '120px' }}>
                     <div
-                      className="weekly-bar"
+                      className={styles.weeklyBar}
                       style={{ height: `${(day.count / maxFreq) * 100}%`, minHeight: day.count > 0 ? '8px' : '0' }}
                     />
                   </div>
-                  <span className="weekly-day">{day.day_name.slice(0, 3)}</span>
-                  <span className="weekly-count">{day.count}</span>
+                  <span className={styles.weeklyDay}>{day.day_name.slice(0, 3)}</span>
+                  <span className={styles.weeklyCount}>{day.count}</span>
                 </div>
               ))}
             </div>
           </section>
 
           {/* Volumen por Grupo Muscular */}
-          <section className="section-card">
-            <h2 className="section-title">🎯 Volumen por Grupo</h2>
-            <div className="volume-list">
+          <section className={styles.sectionCard}>
+            <h2 className={styles.sectionTitle}>🎯 Volumen por Grupo</h2>
+            <div className={styles.volumeList}>
               {volumeByMuscle.map((mg) => (
-                <div key={mg.muscle_group} className="volume-item">
-                  <span className={`muscle-badge muscle-${mg.muscle_group}`}>
+                <div key={mg.muscle_group} className={styles.volumeItem}>
+                  <span className={`${styles.muscleBadge} ${styles[`muscle${mg.muscle_group}` as keyof typeof styles]}`}>
                     {mg.muscle_group}
                   </span>
-                  <div className="volume-bar-container">
+                  <div className={styles.volumeBarContainer}>
                     <div
-                      className="volume-bar"
+                      className={styles.volumeBar}
                       style={{ width: `${(mg.volume / (volumeByMuscle[0]?.volume || 1)) * 100}%` }}
                     />
                   </div>
-                  <span className="volume-value">{formatVolume(mg.volume)}</span>
+                  <span className={styles.volumeValue}>{formatVolume(mg.volume)}</span>
                 </div>
               ))}
             </div>
           </section>
 
           {/* Récords Personales */}
-          <section className="section-card">
-            <h2 className="section-title">🏆 Top 10 Récords</h2>
-            <div className="pr-list">
+          <section className={styles.sectionCard}>
+            <h2 className={styles.sectionTitle}>🏆 Top 10 Récords</h2>
+            <div className={styles.prList}>
               {personalRecords.map((pr, i) => (
-                <div key={i} className="pr-item">
-                  <span className="pr-emoji">
+                <div key={i} className={styles.prItem}>
+                  <span className={styles.prEmoji}>
                     {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`}
                   </span>
-                  <div className="pr-info">
-                    <p className="pr-name">{pr.name}</p>
-                    <p className="pr-date">{formatDate(pr.date)}</p>
+                  <div className={styles.prInfo}>
+                    <p className={styles.prName}>{pr.name}</p>
+                    <p className={styles.prDate}>{formatDate(pr.date)}</p>
                   </div>
-                  <div className="pr-stats">
-                    <p className="pr-weight">{pr.max_weight} lb</p>
-                    <p className="pr-reps">{pr.reps} reps</p>
+                  <div className={styles.prStats}>
+                    <p className={styles.prWeight}>{pr.max_weight} lb</p>
+                    <p className={styles.prReps}>{pr.reps} reps</p>
                   </div>
                 </div>
               ))}
@@ -184,9 +185,9 @@ export default function DashboardClient({
         </div>
 
         {/* Últimos Workouts */}
-        <section className="section-card">
-          <h2 className="section-title">📋 Últimos Entrenamientos</h2>
-          <p className="table-note">Haz clic en cualquier workout para ver los detalles</p>
+        <section className={styles.sectionCard}>
+          <h2 className={styles.sectionTitle}>📋 Últimos Entrenamientos</h2>
+          <p className={styles.tableNote}>Haz clic en cualquier workout para ver los detalles</p>
           <WorkoutTable workouts={recentWorkouts} onWorkoutClick={handleWorkoutClick} />
         </section>
       </div>
@@ -200,9 +201,9 @@ export default function DashboardClient({
       )}
 
       {loading && (
-        <div className="loading-overlay">
-          <div className="loading-box">
-            <p className="loading-text">Cargando...</p>
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingBox}>
+            <p className={styles.loadingText}>Cargando...</p>
           </div>
         </div>
       )}
@@ -212,11 +213,11 @@ export default function DashboardClient({
 
 function StatCard({ title, value, icon }: { title: string; value: string | number; icon: string }) {
   return (
-    <div className="stat-card">
-      <span className="stat-icon">{icon}</span>
+    <div className={styles.statCard}>
+      <span className={styles.statIcon}>{icon}</span>
       <div>
-        <p className="stat-title">{title}</p>
-        <p className="stat-value">{value}</p>
+        <p className={styles.statTitle}>{title}</p>
+        <p className={styles.statValue}>{value}</p>
       </div>
     </div>
   );

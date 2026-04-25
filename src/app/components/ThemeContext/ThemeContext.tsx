@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import styles from './ThemeContext.module.css';
 
 type Theme = 'dark' | 'light';
 

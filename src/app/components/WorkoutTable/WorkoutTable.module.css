@@ -1,0 +1,63 @@
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.table td {
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+  background: var(--table-hover);
+}
+
+.workoutName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.workoutVolume {
+  text-align: right;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.textRight {
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+  .hiddenMd {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hiddenLg {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
 import { getSummary, getRecentWorkouts, getMonthlyStats, getVolumeByMuscleGroup, getPersonalRecords, getWeeklyFrequency } from '@/lib/queries';
-import DashboardClient from './components/DashboardClient';
+import DashboardClient from './components/Dashboard/DashboardClient';
 
 export default function Dashboard() {
   const summary = getSummary();
