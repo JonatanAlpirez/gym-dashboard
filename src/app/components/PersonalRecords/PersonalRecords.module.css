@@ -1,0 +1,67 @@
+.sectionCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.prList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+.prItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.prItem:hover {
+  background: var(--table-hover);
+}
+
+.prEmoji {
+  font-size: 1.5rem;
+}
+
+.prInfo {
+  flex: 1;
+}
+
+.prName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.prDate {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.prStats {
+  text-align: right;
+}
+
+.prWeight {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.prReps {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}

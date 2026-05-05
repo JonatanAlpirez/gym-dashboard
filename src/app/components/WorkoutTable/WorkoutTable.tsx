@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { WorkoutWithStats } from '@/lib/types';
 import styles from './WorkoutTable.module.css';
 
@@ -23,10 +24,9 @@ function formatVolume(volume: number) {
   return volume.toString();
 }
 
-export default function WorkoutTable({ workouts, onWorkoutClick }: {
-  workouts: WorkoutWithStats[];
-  onWorkoutClick: (id: number) => void;
-}) {
+export default function WorkoutTable({ workouts }: { workouts: WorkoutWithStats[] }) {
+  const router = useRouter();
+
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -44,7 +44,8 @@ export default function WorkoutTable({ workouts, onWorkoutClick }: {
           {workouts.map((workout) => (
             <tr
               key={workout.id}
-              onClick={() => onWorkoutClick(workout.id)}
+              onClick={() => router.push(`/workout/${workout.id}`)}
+              style={{ cursor: 'pointer' }}
             >
               <td>{formatDate(workout.date)}</td>
               <td className={styles.workoutName}>{workout.name}</td>

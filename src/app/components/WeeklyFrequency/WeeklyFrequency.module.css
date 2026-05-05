@@ -1,0 +1,56 @@
+.sectionCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.weeklyChart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 0.5rem;
+  height: 10rem;
+}
+
+.weeklyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.weeklyBarContainer {
+  width: 3rem;
+  background: color-mix(in srgb, var(--primary) 20%, transparent);
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  height: 120px;
+}
+
+.weeklyBar {
+  width: 100%;
+  background: var(--primary);
+  border-radius: 0.5rem 0.5rem 0 0;
+  transition: height 0.2s;
+}
+
+.weeklyDay {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.weeklyCount {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}

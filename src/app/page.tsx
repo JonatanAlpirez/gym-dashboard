@@ -1,6 +1,8 @@
 import { getSummary, getRecentWorkouts, getMonthlyStats, getVolumeByMuscleGroup, getPersonalRecords, getWeeklyFrequency } from '@/lib/queries';
 import DashboardClient from './components/Dashboard/DashboardClient';
 
+export const dynamic = 'force-dynamic';
+
 export default function Dashboard() {
   const summary = getSummary();
   const recentWorkouts = getRecentWorkouts(10);

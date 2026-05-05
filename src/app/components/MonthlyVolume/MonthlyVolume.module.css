@@ -1,0 +1,55 @@
+.sectionCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.volumeList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.volumeItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.volumeLabel {
+  font-size: 0.75rem;
+  width: 4rem;
+  color: var(--text-secondary);
+}
+
+.volumeBarContainer {
+  flex: 1;
+  background: var(--bar-bg);
+  border-radius: 9999px;
+  height: 1.5rem;
+  overflow: hidden;
+}
+
+.volumeBar {
+  background: var(--primary);
+  height: 100%;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+}
+
+.volumeBarText {
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 500;
+}
